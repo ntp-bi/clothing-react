@@ -1,11 +1,21 @@
 import React from 'react'
 
-const Routes = () => {
+import { Route, Switch } from 'react-router-dom'
+
+import Home from '../pages/Home'
+import Catalog from '../pages/Catalog'
+import Cart from '../pages/Cart'
+import Product from '../pages/Product'
+
+const routes = () => {
   return (
-    <div>
-      Routes
-    </div>
+    <Switch>
+      <Route path='/' exact component={Home} />
+      <Route path='/catalog/:slug' component={Product} />
+      <Route path='/catalog' component={Catalog} />
+      <Route path='/cart' component={Cart} />
+    </Switch>
   )
 }
 
-export default Routes
+export default routes
