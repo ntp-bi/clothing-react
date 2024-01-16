@@ -12,13 +12,13 @@ const Layout = () => {
     <BrowserRouter>
       <Route render={props => (
         <div>
+          <Header {...props} />
           <div className='container'>
-            <Header {...props} />
             <div className='main'>
               <Routes />
             </div>
-            <Footer />
           </div>
+          <Footer />
         </div>
       )} />
     </BrowserRouter>
