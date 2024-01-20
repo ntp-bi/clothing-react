@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Helmet from '../components/Helmet'
-import Grid from '../components/Grid'
-import ProductCard from '../components/ProductCard'
 import CheckBox from '../components/CheckBox'
 import Button from '../components/Button'
+import InfinityList from '../components/InfinityList'
 
 import productData from '../assets/fake-data/products'
 import category from '../assets/fake-data/category'
@@ -59,7 +58,7 @@ const Catalog = () => {
   }
 
   const clearFilter = () => setFilter(initFilter)
-  
+
 
   const updateProducts = useCallback(
     () => {
@@ -90,10 +89,17 @@ const Catalog = () => {
     updateProducts()
   }, [updateProducts])
 
+  const filterRef = useRef(null)
+
+  const showHideFilter = () => filterRef.current.classList.toggle('active')
+
   return (
     <Helmet title='Sản phẩm'>
       <div className="catalog">
-        <div className="catalog__filter">
+        <div className="catalog__filter" ref={filterRef}>
+          <div className="catalog__filter__close" onClick={() => showHideFilter()}>
+            <i className="bx bx-left-arrow-alt"></i>
+          </div>
           <div className="catalog__filter__widget">
             <div className="catalog__filter__widget__title">
               danh mục sản phẩm
@@ -164,26 +170,18 @@ const Catalog = () => {
             </div>
           </div>
         </div>
-        <div className="catalog__content">
-          <Grid
-            col={3}
-            mdCol={2}
-            smCol={1}
-            gap={20}
+        <div className="catalog__filter__toggle">
+          <Button
+            size="sm"
+            onClick={() => showHideFilter()}
           >
-            {
-              products.map((item, index) => (
-                <ProductCard
-                  key={index}
-                  img01={item.image01}
-                  img02={item.image02}
-                  name={item.title}
-                  price={Number(item.price)}
-                  slug={item.slug}
-                />
-              ))
-            }
-          </Grid>
+            bộ lọc
+          </Button>
+        </div>
+        <div className="catalog__content">
+          <InfinityList
+            data={products}
+          />
         </div>
       </div>
     </Helmet>
