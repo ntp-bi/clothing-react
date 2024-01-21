@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '../assets/images/Logo-2.png'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
-import { cleanup } from '@testing-library/react'
+// import { cleanup } from '@testing-library/react'
 
 const mainNav = [
   {

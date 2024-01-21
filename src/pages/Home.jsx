@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Helmet from '../components/Helmet'
 import HeroSlider from '../components/HeroSlider'
-import Section, { SectionBody, SectionTitle } from '../components/Section'
+import Section, { SectionTitle, SectionBody } from '../components/Section'
 import PolicyCard from '../components/PolicyCard'
 import Grid from '../components/Grid'
 import ProductCard from '../components/ProductCard'
@@ -16,16 +16,17 @@ import banner from '../assets/images/banner.png'
 
 const Home = () => {
   return (
-    <Helmet title='Trang chủ'>
+    <Helmet title="Trang chủ">
       {/* hero slider */}
       <HeroSlider
         data={heroSliderData}
         control={true}
-        auto={true}
+        auto={false}
         timeOut={5000}
       />
       {/* end hero slider */}
-      {/*policy section*/}
+
+      {/* policy section */}
       <Section>
         <SectionBody>
           <Grid
@@ -35,21 +36,20 @@ const Home = () => {
             gap={20}
           >
             {
-              policy.map((item, index) =>
-                <Link to='/policy' key={index}>
-                  <PolicyCard
-                    name={item.name}
-                    description={item.description}
-                    icon={item.icon}
-                  />
-                </Link>
-              )
+              policy.map((item, index) => <Link key={index} to="/policy">
+                <PolicyCard
+                  name={item.name}
+                  description={item.description}
+                  icon={item.icon}
+                />
+              </Link>)
             }
           </Grid>
         </SectionBody>
       </Section>
-      {/*end policy section*/}
-      {/*best selling section*/}
+      {/* end policy section */}
+
+      {/* best selling section */}
       <Section>
         <SectionTitle>
           top sản phẩm bán chạy trong tuần
@@ -76,9 +76,9 @@ const Home = () => {
           </Grid>
         </SectionBody>
       </Section>
-      {/*end best selling section*/}
+      {/* end best selling section */}
 
-      {/*new arrival section*/}
+      {/* new arrival section */}
       <Section>
         <SectionTitle>
           sản phẩm mới
@@ -105,9 +105,9 @@ const Home = () => {
           </Grid>
         </SectionBody>
       </Section>
-      {/*end new arrival section*/}
+      {/* end new arrival section */}
 
-      {/*banner*/}
+      {/* banner */}
       <Section>
         <SectionBody>
           <Link to="/catalog">
@@ -115,9 +115,9 @@ const Home = () => {
           </Link>
         </SectionBody>
       </Section>
-      {/*end banner*/}
+      {/* end banner */}
 
-      {/*popular product section*/}
+      {/* popular product section */}
       <Section>
         <SectionTitle>
           phổ biến
@@ -130,7 +130,7 @@ const Home = () => {
             gap={20}
           >
             {
-              productData.getProducts(8).map((item, index) => (
+              productData.getProducts(12).map((item, index) => (
                 <ProductCard
                   key={index}
                   img01={item.image01}
@@ -144,7 +144,7 @@ const Home = () => {
           </Grid>
         </SectionBody>
       </Section>
-      {/*end popular product section*/}
+      {/* end popular product section */}
     </Helmet>
   )
 }
