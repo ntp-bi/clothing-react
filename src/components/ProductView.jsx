@@ -8,7 +8,14 @@ import numberWithCommas from '../utils/numberWithCommas'
 
 const ProductView = props => {
 
-    const product = props.product
+    let product = props.product
+
+    if (product === undefined) product = {
+        price: 0,
+        title: "",
+        colors: [],
+        size: []
+    }
 
     const [preViewImg, setPreViewImg] = useState(product.image01)
 
@@ -51,12 +58,12 @@ const ProductView = props => {
 
     const addToCart = () => {
         if (check()) {
-           console.log({color, size, quantity});
+            console.log({ color, size, quantity });
         }
     }
 
     const goToCart = () => {
-        if(check()){
+        if (check()) {
             props.history.push('/cart')
         }
     }
@@ -173,29 +180,29 @@ const ProductView = props => {
             </div>
 
             <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
-                    <div className="product-description__title">
-                        Chi tiết sản phẩm
-                    </div>
-                    <div className={"product-description__content"}
-                        dangerouslySetInnerHTML={{ __html: product.description }}
-                    ></div>
-                    <div className="product-description__toggle">
-                        <Button
-                            size="sm"
-                            onClick={() => setDescriptionExpand(!descriptionExpand)}
-                        >
-                            {
-                                descriptionExpand ? 'Thu gọn' : 'Xem thêm'
-                            }
-                        </Button>
-                    </div>
+                <div className="product-description__title">
+                    Chi tiết sản phẩm
                 </div>
+                <div className={"product-description__content"}
+                    dangerouslySetInnerHTML={{ __html: product.description }}
+                ></div>
+                <div className="product-description__toggle">
+                    <Button
+                        size="sm"
+                        onClick={() => setDescriptionExpand(!descriptionExpand)}
+                    >
+                        {
+                            descriptionExpand ? 'Thu gọn' : 'Xem thêm'
+                        }
+                    </Button>
+                </div>
+            </div>
         </div>
     )
 }
 
 ProductView.propTypes = {
-    product: PropTypes.object.isRequired
+    product: PropTypes.object
 }
 
 export default withRouter(ProductView)
